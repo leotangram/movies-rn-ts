@@ -1,17 +1,17 @@
-export interface IMovieDBNowPlaying {
-  dates: IDates
+export interface MovieDBNowPlaying {
+  dates: Dates
   page: number
-  results: IMovie[]
+  results: Movie[]
   total_pages: number
   total_results: number
 }
 
-export interface IDates {
+export interface Dates {
   maximum: string
   minimum: string
 }
 
-export interface IMovie {
+export interface Movie {
   adult: boolean
   backdrop_path: string
   genre_ids: number[]
