@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { Image, StyleSheet, View } from 'react-native'
+
 import { Movie } from '../interfaces/movieInterface'
 
 interface MoviePoster {
