@@ -9,6 +9,7 @@ import {
   View
 } from 'react-native'
 import { RootStackParams } from '../navigation/Navigation'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 const { height: screenHeight } = Dimensions.get('screen')
 
@@ -22,11 +23,16 @@ const DetailScreen: FC<DetailScreenProps> = ({ route }) => {
   return (
     <ScrollView>
       <View style={styles.imageContainer}>
-        <Image source={{ uri }} style={styles.posterImage} />
+        <View style={styles.imageBorder}>
+          <Image source={{ uri }} style={styles.posterImage} />
+        </View>
       </View>
       <View style={styles.marginContainer}>
         <Text style={styles.subtitle}>{movie.original_title}</Text>
         <Text style={styles.title}>{movie.title}</Text>
+      </View>
+      <View style={styles.marginContainer}>
+        <Icon color="grey" name="star-outline" size={20} />
       </View>
     </ScrollView>
   )
@@ -40,7 +46,6 @@ const styles = StyleSheet.create({
     borderBottomStartRadius: 25,
     elevation: 9,
     height: screenHeight * 0.7,
-    overflow: 'hidden',
     shadowColor: '#000000',
     shadowOffset: {
       height: 10,
@@ -49,6 +54,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.24,
     shadowRadius: 7,
     width: '100%'
+  },
+  imageBorder: {
+    borderBottomEndRadius: 25,
+    borderBottomStartRadius: 25,
+    flex: 1,
+    overflow: 'hidden'
   },
   posterImage: {
     flex: 1
