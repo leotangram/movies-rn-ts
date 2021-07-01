@@ -24,7 +24,7 @@ export default MoviePoster
 const styles = StyleSheet.create({
   container: {
     borderRadius: 18,
-    elevation: 10,
+    elevation: 9,
     marginHorizontal: 8,
     shadowColor: '#000000',
     shadowOffset: {
