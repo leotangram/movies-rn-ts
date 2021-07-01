@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native'
 
 import { Movie } from '../interfaces/movieInterface'
 
@@ -20,7 +20,9 @@ const MoviePoster: FC<MoviePoster> = ({ height = 420, movie, width = 300 }) => {
       onPress={() => navigate('Detail', movie)}
       style={{ ...styles.container, height, width }}
     >
-      <Image source={{ uri }} style={styles.image} />
+      <View style={styles.imageContainer}>
+        <Image source={{ uri }} style={styles.image} />
+      </View>
     </TouchableOpacity>
   )
 }
@@ -29,9 +31,14 @@ export default MoviePoster
 
 const styles = StyleSheet.create({
   container: {
+    marginHorizontal: 2,
+    paddingBottom: 20,
+    paddingHorizontal: 7
+  },
+  imageContainer: {
     borderRadius: 18,
     elevation: 9,
-    marginHorizontal: 8,
+    flex: 1,
     shadowColor: '#000000',
     shadowOffset: {
       height: 10,
