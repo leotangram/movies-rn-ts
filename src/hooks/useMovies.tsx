@@ -1,15 +1,20 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useState } from 'react'
 import movieDB from '../api/movieDB'
-import { MovieDBNowPlaying, Movie } from '../interfaces/movieInterface'
+import { MovieDBResponse, Movie } from '../interfaces/movieInterface'
 
 const useMovies = () => {
   const [isLoading, setIsLoading] = useState(true)
-  const [premierMovies, setPremierMovies] = useState<Movie[]>([])
+  const [nowPlayingMovies, setNowPlayingMovies] = useState<Movie[]>([])
+  const [popularMovies, setPopularMovies] = useState<Movie[]>([])
 
   const getMovies = async () => {
-    const response = await movieDB.get<MovieDBNowPlaying>('/now_playing')
-    setPremierMovies(response.data.results)
+    const responseNowPlaing = await movieDB.get<MovieDBResponse>('/now_playing')
+    const responsePopular = await movieDB.get<MovieDBResponse>('/popular')
+    await movieDB.get<MovieDBResponse>('/top_rated')
+    await movieDB.get<MovieDBResponse>('/upcoming')
+    setNowPlayingMovies(responseNowPlaing.data.results)
+    setPopularMovies(responsePopular.data.results)
     setIsLoading(false)
   }
 
@@ -19,7 +24,8 @@ const useMovies = () => {
 
   return {
     isLoading,
-    premierMovies
+    nowPlayingMovies,
+    popularMovies
   }
 }
 
