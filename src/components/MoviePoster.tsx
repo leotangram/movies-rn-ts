@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
-import { Image, StyleSheet, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import { Image, StyleSheet, TouchableOpacity } from 'react-native'
 
 import { Movie } from '../interfaces/movieInterface'
 
@@ -10,12 +11,17 @@ interface MoviePoster {
 }
 
 const MoviePoster: FC<MoviePoster> = ({ height = 420, movie, width = 300 }) => {
+  const { navigate } = useNavigation()
   const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
 
   return (
-    <View style={{ ...styles.container, height, width }}>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={() => navigate('Detail', movie)}
+      style={{ ...styles.container, height, width }}
+    >
       <Image source={{ uri }} style={styles.image} />
-    </View>
+    </TouchableOpacity>
   )
 }
 
