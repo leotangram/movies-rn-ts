@@ -1,5 +1,12 @@
 import React from 'react'
-import { ActivityIndicator, Dimensions, View } from 'react-native'
+import {
+  ActivityIndicator,
+  Dimensions,
+  FlatList,
+  ScrollView,
+  Text,
+  View
+} from 'react-native'
 import Carousel from 'react-native-snap-carousel'
 import useMovies from '../hooks/useMovies'
 import MoviePoster from '../components/MoviePoster'
@@ -20,16 +27,30 @@ const HomeScreen = () => {
   }
 
   return (
-    <View style={{ marginTop: top + 20 }}>
-      <View style={{ height: 440 }}>
-        <Carousel
-          data={premierMovies}
-          itemWidth={300}
-          renderItem={({ item }) => <MoviePoster movie={item} />}
-          sliderWidth={windowWidth}
-        />
+    <ScrollView>
+      <View style={{ marginTop: top + 20 }}>
+        <View style={{ height: 440 }}>
+          <Carousel
+            data={premierMovies}
+            itemWidth={300}
+            renderItem={({ item }) => <MoviePoster movie={item} />}
+            sliderWidth={windowWidth}
+          />
+        </View>
+        <View style={{ backgroundColor: 'red', height: 260 }}>
+          <Text style={{ fontSize: 30, fontWeight: 'bold' }}>En cine</Text>
+          <FlatList
+            data={premierMovies}
+            horizontal
+            keyExtractor={({ id }) => id.toString()}
+            renderItem={({ item }) => (
+              <MoviePoster height={200} movie={item} width={140} />
+            )}
+            showsHorizontalScrollIndicator={false}
+          />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
