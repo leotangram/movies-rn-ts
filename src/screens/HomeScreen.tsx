@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { ActivityIndicator, Dimensions, ScrollView, View } from 'react-native'
 import Carousel from 'react-native-snap-carousel'
 import useMovies from '../hooks/useMovies'
@@ -16,6 +16,12 @@ const HomeScreen = () => {
 
   const { isLoading, nowPlaying, popular, topRated, upcoming } = useMovies()
   const { top } = useSafeAreaInsets()
+
+  useEffect(() => {
+    if (nowPlaying.length > 0) {
+      getPosterColors(0)
+    }
+  }, [nowPlaying])
 
   const getPosterColors = async (index: number) => {
     const movie = nowPlaying[index]
