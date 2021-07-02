@@ -1,6 +1,7 @@
 import React from 'react'
 import { ActivityIndicator, Dimensions, ScrollView, View } from 'react-native'
 import Carousel from 'react-native-snap-carousel'
+import ImageColors from 'react-native-image-colors'
 import useMovies from '../hooks/useMovies'
 import MoviePoster from '../components/MoviePoster'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -12,6 +13,13 @@ const { width: windowWidth } = Dimensions.get('window')
 const HomeScreen = () => {
   const { isLoading, nowPlaying, popular, topRated, upcoming } = useMovies()
   const { top } = useSafeAreaInsets()
+
+  const getPosterColors = async (index: number) => {
+    const movie = nowPlaying[index]
+    const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+    const colors = await ImageColors.getColors(uri, {})
+    console.log(colors)
+  }
 
   if (isLoading) {
     return (
@@ -30,6 +38,7 @@ const HomeScreen = () => {
               data={nowPlaying}
               inactiveSlideOpacity={0.9}
               itemWidth={300}
+              onSnapToItem={index => getPosterColors(index)}
               renderItem={({ item }) => <MoviePoster movie={item} />}
               sliderWidth={windowWidth}
             />
