@@ -11,10 +11,12 @@ const CastItem: FC<CastItemProps> = ({ character }) => {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={{ uri }}
-        style={{ borderRadius: 10, height: 50, width: 50 }}
-      />
+      {character.profile_path && (
+        <Image
+          source={{ uri }}
+          style={{ borderRadius: 10, height: 50, width: 50 }}
+        />
+      )}
       <View style={styles.characterInfo}>
         <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
           {character.name}
@@ -33,17 +35,21 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ffffff',
     borderRadius: 10,
+    elevation: 9,
     flexDirection: 'row',
+    height: 50,
+    marginLeft: 20,
+    paddingRight: 15,
     shadowColor: '#000000',
     shadowOffset: {
       height: 10,
       width: 0
     },
     shadowOpacity: 0.24,
-    shadowRadius: 7,
-    elevation: 9
+    shadowRadius: 7
   },
   characterInfo: {
-    marginLeft: 10
+    marginLeft: 10,
+    marginTop: 4
   }
 })

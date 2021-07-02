@@ -15,10 +15,7 @@ const Navigation = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
-        cardStyle: {
-          backgroundColor: '#ffffff'
-        }
+        headerShown: false
       }}
     >
       <Stack.Screen name="Home" component={HomeScreen} />

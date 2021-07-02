@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Text, View } from 'react-native'
+import { FlatList, Text, View } from 'react-native'
 import currencyFormatter from 'currency-formatter'
 import { MovieFull } from '../interfaces/movieInterface'
 import { Cast } from '../interfaces/creditsInterface'
@@ -32,18 +32,26 @@ const MovieDetails: FC<MovieDetailsProps> = ({ cast, movieFull }) => {
         <Text style={{ fontSize: 18 }}>
           {currencyFormatter.format(movieFull.budget, { code: 'USD' })}
         </Text>
-        <View style={{ marginBottom: 100, marginTop: 10 }}>
-          <Text
-            style={{
-              fontSize: 23,
-              fontWeight: 'bold',
-              marginTop: 10
-            }}
-          >
-            Actores
-          </Text>
-          <CastItem character={cast[0]} />
-        </View>
+      </View>
+      <View style={{ marginBottom: 100, marginTop: 10 }}>
+        <Text
+          style={{
+            fontSize: 23,
+            fontWeight: 'bold',
+            marginLeft: 20,
+            marginTop: 10
+          }}
+        >
+          Actores
+        </Text>
+        <FlatList
+          data={cast}
+          horizontal
+          keyExtractor={item => item.id.toString()}
+          renderItem={({ item }) => <CastItem character={item} />}
+          showsHorizontalScrollIndicator={false}
+          style={{ height: 70, marginTop: 10 }}
+        />
       </View>
     </>
   )
