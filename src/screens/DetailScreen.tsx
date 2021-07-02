@@ -37,7 +37,7 @@ const DetailScreen: FC<DetailScreenProps> = ({ route }) => {
       {isLoading ? (
         <ActivityIndicator color="grey" size={35} style={{ marginTop: 20 }} />
       ) : (
-        <MovieDetails movieFull={movieFull!} />
+        <MovieDetails cast={cast} movieFull={movieFull!} />
       )}
     </ScrollView>
   )
