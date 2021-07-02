@@ -20,7 +20,7 @@ interface DetailScreenProps
 const DetailScreen: FC<DetailScreenProps> = ({ route }) => {
   const movie = route.params
   const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-  const { state } = useMovieDetails(movie.id)
+  const { cast, isLoading, movieFull } = useMovieDetails(movie.id)
 
   return (
     <ScrollView>
